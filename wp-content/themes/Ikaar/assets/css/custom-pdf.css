@@ -1,0 +1,107 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'FuturaPT-Light';
+    src: url('../fonts/FuturaPT-Light.eot');
+    src: url('../fonts/FuturaPT-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FuturaPT-Light.woff2') format('woff2'),
+        url('../fonts/FuturaPT-Light.woff') format('woff'),
+        url('../fonts/FuturaPT-Light.ttf') format('truetype'),
+        url('../fonts/FuturaPT-Light.svg#FuturaPT-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FuturaPT-Book';
+    src: url('../fonts/FuturaPT-Book.eot');
+    src: url('../fonts/FuturaPT-Book.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FuturaPT-Book.woff2') format('woff2'),
+        url('../fonts/FuturaPT-Book.woff') format('woff'),
+        url('../fonts/FuturaPT-Book.ttf') format('truetype'),
+        url('../fonts/FuturaPT-Book.svg#FuturaPT-Book') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'FuturaPT-Medium';
+    src: url('../fonts/FuturaPT-Medium.eot');
+    src: url('../fonts/FuturaPT-Medium.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/FuturaPT-Medium.woff2') format('woff2'),
+        url('../fonts/FuturaPT-Medium.woff') format('woff'),
+        url('../fonts/FuturaPT-Medium.ttf') format('truetype'),
+        url('../fonts/FuturaPT-Medium.svg#FuturaPT-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* ~-~-~-~-~-~-~-~-~-~ global adjustments  start~-~-~-~-~-~-~-~-~-~ */
+html { overflow-x: hidden; }
+body { margin: 0; padding: 0; font-family: 'FuturaPT-Light'; font-weight: 300; font-size: 20px; color: var(--black); overflow-x: hidden;}
+h1, h2, h3, h4, h5, h6 { font-family: 'FuturaPT-Medium'; margin: 0 0 20px; padding: 0; color: #D4A884;}
+
+h2 { font-size: 34px; }
+h4 { font-size: 28px; }
+h5 { font-size: 24px; }
+p { line-height: 1.4; margin: 0 0 20px; padding: 0; }
+
+
+
+@media only screen and (max-width: 991px) {}
+
+img { max-width: 100%; }
+.img img { width: 100%; }
+a, img { border: 0; text-decoration: none; outline: none; }
+a, a:link, a:visited, a:focus, a:hover { outline: none; text-decoration: none; transition: var(--common-transition); }
+a:hover { text-decoration: none; }
+ul { padding: 0; margin: 0; list-style: none; }
+.row{ display: flex; flex-wrap: wrap;}
+
+.col-4{ width: 25%;}
+.col-5{ width: 41.66666667%;}
+.col-6{ width: 50%;}
+.col-7{  width: 58.33333333%;}
+.col-8{ width: 75%;}
+
+.pdf-section .full-page-wraper.item-wrap { height: 100vh;}
+.pdf-section .item-wrap { display: flex; align-items: center; background: #333333; width: 793px; height: 1122px; position: relative; color: #fff; padding-right: 130px; margin: 0 auto; }
+.pdf-section .item-wrap .container-fluid { width: 100%; }
+.pdf-section .item-wrap::before{ position: absolute; content: ''; background: url(../images/ikaar-design.png); background-size: cover !important; background-position: center !important; background-repeat: no-repeat !important; width: 60px; height: 100%; top: 0; right: 30px; z-index: 3;}
+.pdf-section .item-wrap:nth-child(even){ padding-right: 0; padding-left: 130px;}
+.pdf-section .item-wrap:nth-child(even)::before{ right: auto; left: 30px;}
+
+.pdf-section .full-page-wraper .front-page-content { display: flex; align-items: center; justify-content: center; position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto; }
+.pdf-section .full-page-wraper .logo-outer { max-width: 350px; text-align: center; color: #fff;}
+.pdf-section .full-page-wraper .hiddenlogo-wraper { max-width: 200px; margin: 0 auto 25px;}
+
+.pdf-section .item-wrap .row{ align-items: center;}
+.pdf-section .property-info-wrap.item-wrap .info-wraper { padding-right: 30px; }
+.pdf-section .property-info-wrap.item-wrap .info-wraper h2{ color: #fff;}
+.pdf-section .property-info-wrap .menu-wrap li { display: flex; margin-bottom: 15px;}
+.pdf-section .property-info-wrap .menu-wrap li  span{ display: block; width: 50%;}
+.pdf-section .property-info-wrap .menu-wrap li  span:first-child {  color: #D4A884; font-weight: 600;  }
+
+.pdf-section .item-wrap .image-wraper { position: relative; padding-bottom: 90%; }
+.pdf-section .item-wrap .image-wraper img { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover; }
+.description-wrap.item-wrap .description-info { padding-left: 30px; }
+
+.pdf-section .item-wrap.ful-image-outer { padding-bottom: 50%; }
+.pdf-section .item-wrap.ful-image-outer img { position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1;}
+.pdf-section .item-wrap.ful-image-outer::before { right: 10px; }
+.pdf-section .item-wrap.ful-image-outer:nth-child(even)::before { left: 10px; }
+
+.pdf-section .full-page-wraper .logo-outer li{ font-family: 'FuturaPT-Medium';}
+.pdf-section .full-page-wraper .logo-outer li a{ color: #fff;}
+/* @media only screen and (max-width: 1599px) {
+	.pdf-section .item-wrap .image-wraper{ padding-bottom: 100%;}
+	h2{ font-size: 42px;}
+}
+@media only screen and (max-width: 1399px){
+	.pdf-section .item-wrap .image-wraper { padding-bottom: 110%; }
+	.pdf-section .item-wrap.ful-image-outer { padding-bottom: 60%; }
+}
+@media only screen and (max-width: 1199px){
+
+} */

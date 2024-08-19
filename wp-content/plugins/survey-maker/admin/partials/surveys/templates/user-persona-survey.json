@@ -1,0 +1,659 @@
+{
+    "ays_survey_key": 1,
+    "title": "User Persona Survey Template",
+    "options": "{\"survey_version\":\"4.1.6\",\"survey_theme\":\"classic_light\",\"survey_color\":\"rgb(255, 87, 34)\",\"survey_background_color\":\"#fff\",\"survey_text_color\":\"#333\",\"survey_buttons_text_color\":\"#333\",\"survey_width\":\"\",\"survey_width_by_percentage_px\":\"pixels\",\"survey_mobile_width\":\"\",\"survey_mobile_width_by_percent_px\":\"percentage\",\"survey_mobile_max_width\":\"\",\"survey_custom_class\":\"\",\"survey_custom_css\":\"\",\"survey_logo\":\"\",\"survey_logo_url\":\"\",\"survey_enable_logo_url\":\"off\",\"survey_logo_image_position\":\"right\",\"survey_logo_title\":\"\",\"survey_cover_photo\":\"\",\"survey_cover_photo_height\":150,\"survey_cover_photo_mobile_height\":150,\"survey_cover_photo_position\":\"center_center\",\"survey_cover_photo_object_fit\":\"cover\",\"survey_cover_only_first_section\":\"off\",\"survey_question_font_size\":16,\"survey_question_font_size_mobile\":16,\"survey_question_title_alignment\":\"left\",\"survey_question_image_width\":\"\",\"survey_question_image_height\":\"\",\"survey_question_image_sizing\":\"cover\",\"survey_question_padding\":24,\"survey_question_caption_text_color\":\"#333\",\"survey_question_caption_text_alignment\":\"center\",\"survey_question_caption_font_size\":16,\"survey_question_caption_font_size_on_mobile\":16,\"survey_question_caption_text_transform\":\"none\",\"survey_answer_font_size\":15,\"survey_answer_font_size_on_mobile\":15,\"survey_answers_view\":\"list\",\"survey_answers_view_alignment\":\"flex-start\",\"survey_answers_object_fit\":\"cover\",\"survey_answers_padding\":8,\"survey_answers_gap\":0,\"survey_answers_image_size\":195,\"survey_buttons_bg_color\":\"#fff\",\"survey_buttons_size\":\"medium\",\"survey_buttons_font_size\":14,\"survey_buttons_mobile_font_size\":14,\"survey_buttons_left_right_padding\":20,\"survey_buttons_top_bottom_padding\":0,\"survey_buttons_border_radius\":3,\"survey_buttons_alignment\":\"left\",\"survey_buttons_top_distance\":10,\"survey_title_alignment\":\"left\",\"survey_title_font_size\":30,\"survey_title_font_size_for_mobile\":30,\"survey_title_box_shadow_enable\":\"off\",\"survey_title_box_shadow_color\":\"#333\",\"survey_title_text_shadow_x_offset\":0,\"survey_title_text_shadow_y_offset\":0,\"survey_title_text_shadow_z_offset\":10,\"survey_section_title_font_size\":32,\"survey_section_title_font_size_mobile\":32,\"survey_section_title_alignment\":\"left\",\"survey_section_description_alignment\":\"left\",\"survey_section_description_font_size\":14,\"survey_section_description_font_size_mobile\":14,\"survey_show_title\":\"on\",\"survey_show_section_header\":\"on\",\"survey_enable_randomize_answers\":\"off\",\"survey_enable_randomize_questions\":\"off\",\"survey_enable_rtl_direction\":\"off\",\"survey_enable_clear_answer\":\"off\",\"survey_enable_previous_button\":\"off\",\"survey_enable_survey_start_loader\":\"off\",\"survey_before_start_loader\":\"default\",\"survey_allow_html_in_answers\":\"off\",\"survey_allow_html_in_section_description\":\"off\",\"survey_enable_leave_page\":\"on\",\"survey_auto_numbering\":\"none\",\"survey_enable_info_autofill\":\"on\",\"survey_auto_numbering_questions\":\"none\",\"survey_enable_schedule\":\"off\",\"survey_schedule_active\":\"\",\"survey_schedule_deactive\":\"\",\"survey_schedule_show_timer\":\"off\",\"survey_show_timer_type\":\"countdown\",\"survey_schedule_pre_start_message\":\"The survey will be available soon!\",\"survey_schedule_expiration_message\":\"This survey has expired!\",\"survey_logo_url_new_tab\":\"off\",\"survey_full_screen_mode\":\"off\",\"survey_full_screen_button_color\":\"#333\",\"survey_enable_progress_bar\":\"off\",\"survey_hide_section_pagination_text\":\"off\",\"survey_pagination_positioning\":\"none\",\"survey_hide_section_bar\":\"off\",\"survey_progress_bar_text\":\"Page\",\"survey_pagination_text_color\":\"#333\",\"survey_show_sections_questions_count\":\"off\",\"survey_required_questions_message\":\"This is a required question\",\"survey_redirect_after_submit\":\"off\",\"survey_submit_redirect_url\":\"\",\"survey_submit_redirect_delay\":\"\",\"survey_submit_redirect_new_tab\":\"off\",\"survey_enable_exit_button\":\"off\",\"survey_exit_redirect_url\":\"\",\"survey_enable_restart_button\":\"off\",\"survey_final_result_text\":\"\",\"survey_show_questions_as_html\":\"on\",\"survey_main_url\":\"\",\"survey_loader\":\"default\",\"survey_loader_text\":\"\",\"survey_loader_gif\":\"\",\"survey_loader_gif_width\":\"100\",\"survey_social_buttons\":\"off\",\"survey_social_buttons_heading\":\"\",\"survey_social_button_ln\":\"off\",\"survey_social_button_fb\":\"off\",\"survey_social_button_tr\":\"off\",\"survey_social_button_vk\":\"off\",\"survey_limit_users\":\"off\",\"survey_limit_users_by\":\"ip\",\"survey_max_pass_count\":1,\"survey_limitation_message\":\"\",\"survey_redirect_url\":\"\",\"survey_redirect_delay\":0,\"survey_enable_logged_users\":\"off\",\"survey_logged_in_message\":\"\",\"survey_show_login_form\":\"off\",\"survey_enable_takers_count\":\"off\",\"survey_takers_count\":1,\"survey_enable_mail_user\":\"off\",\"survey_mail_message\":\"\",\"survey_enable_mail_admin\":\"off\",\"survey_send_mail_to_site_admin\":\"off\",\"survey_additional_emails\":\"\",\"survey_mail_message_admin\":\"\",\"survey_email_configuration_from_email\":\"\",\"survey_email_configuration_from_name\":\"\",\"survey_email_configuration_from_subject\":\"\",\"survey_email_configuration_replyto_email\":\"\",\"survey_email_configuration_replyto_name\":\"\"}",
+    "sections": [
+        {
+            "title": "Basic Demographics",
+            "description": "We\\'re interested in getting to know you better! Please take a moment to share some basic information about yourself.",
+            "ordering": "1",
+            "questions": [
+                {
+                    "id": "44",
+                    "author_id": "1",
+                    "section_id": "16",
+                    "category_ids": "1",
+                    "question": "What is your age?",
+                    "type": "select",
+                    "status": "published",
+                    "trash_status": "",
+                    "date_created": "2024-02-22 12:56:14",
+                    "date_modified": "2024-02-23 08:46:32",
+                    "user_variant": "off",
+                    "user_explanation": "",
+                    "image": "",
+                    "ordering": "1",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "18-24",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "25-34",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "35-44",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "45-54",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "55+",
+                            "image": "",
+                            "ordering": "5",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        }
+                    ]
+                },
+                {
+                    "id": "45",
+                    "author_id": "1",
+                    "section_id": "16",
+                    "category_ids": "1",
+                    "question": "What is your gender?",
+                    "type": "radio",
+                    "status": "published",
+                    "trash_status": "",
+                    "date_created": "2024-02-22 12:56:14",
+                    "date_modified": "2024-02-23 08:46:32",
+                    "user_variant": "off",
+                    "user_explanation": "",
+                    "image": "",
+                    "ordering": "2147483647",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Male",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Female",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Prefer not to say",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        }
+                    ]
+                },
+                {
+                    "id": "46",
+                    "author_id": "1",
+                    "section_id": "16",
+                    "category_ids": "1",
+                    "question": "What is your highest level of education completed?",
+                    "type": "radio",
+                    "status": "published",
+                    "trash_status": "",
+                    "date_created": "2024-02-22 12:56:14",
+                    "date_modified": "2024-02-23 08:46:32",
+                    "user_variant": "off",
+                    "user_explanation": "",
+                    "image": "",
+                    "ordering": "2147483647",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "High School or equivalent",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Some College/Associate's Degree",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Bachelor's Degree",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Master's Degree",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Doctorate/Professional Degree",
+                            "image": "",
+                            "ordering": "5",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        }
+                    ]
+                },
+                {
+                    "id": "47",
+                    "author_id": "1",
+                    "section_id": "16",
+                    "category_ids": "1",
+                    "question": "What is your current employment status?",
+                    "type": "radio",
+                    "status": "published",
+                    "trash_status": "",
+                    "date_created": "2024-02-22 12:56:14",
+                    "date_modified": "2024-02-23 08:46:32",
+                    "user_variant": "off",
+                    "user_explanation": "",
+                    "image": "",
+                    "ordering": "2147483647",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Employed full-time",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Employed part-time",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Self-employed",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Unemployed",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Student",
+                            "image": "",
+                            "ordering": "5",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Retired",
+                            "image": "",
+                            "ordering": "6",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Technology Usage",
+            "description": "Let\\'s talk tech! Tell us how often you\\'re online, what devices you use, and which social media platforms you\\'re active on.",
+            "ordering": "2",
+            "questions": [
+                {
+                    "id": "48",
+                    "author_id": "1",
+                    "section_id": "17",
+                    "category_ids": "1",
+                    "question": "How often do you use the internet?",
+                    "type": "radio",
+                    "status": "published",
+                    "trash_status": "",
+                    "date_created": "2024-02-22 12:56:14",
+                    "date_modified": "2024-02-23 08:46:32",
+                    "user_variant": "off",
+                    "user_explanation": "",
+                    "image": "",
+                    "ordering": "2147483647",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Multiple times per day",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Once per day",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Few times per week",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Once per week",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Rarely",
+                            "image": "",
+                            "ordering": "5",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        }
+                    ]
+                },
+                {
+                    "id": "49",
+                    "author_id": "1",
+                    "section_id": "17",
+                    "category_ids": "1",
+                    "question": "What devices do you primarily use to access the internet?",
+                    "type": "radio",
+                    "status": "published",
+                    "trash_status": "",
+                    "date_created": "2024-02-22 12:56:14",
+                    "date_modified": "2024-02-23 08:46:32",
+                    "user_variant": "off",
+                    "user_explanation": "",
+                    "image": "",
+                    "ordering": "2147483647",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Smartphone",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Laptop",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Desktop",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Tablet",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        }
+                    ]
+                },
+                {
+                    "id": "50",
+                    "author_id": "1",
+                    "section_id": "17",
+                    "category_ids": "1",
+                    "question": "Which social media platforms do you use regularly? (Select all that apply)",
+                    "type": "checkbox",
+                    "status": "published",
+                    "trash_status": "",
+                    "date_created": "2024-02-22 12:56:14",
+                    "date_modified": "2024-02-23 08:46:32",
+                    "user_variant": "on",
+                    "user_explanation": "",
+                    "image": "",
+                    "ordering": "2147483647",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Facebook",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Instagram",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Twitter",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "LinkedIn",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "TikTok",
+                            "image": "",
+                            "ordering": "5",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Snapchat",
+                            "image": "",
+                            "ordering": "6",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        },
+                        {
+                            "answer": "Pinterest",
+                            "image": "",
+                            "ordering": "7",
+                            "placeholder": "",
+                            "options": "",
+                            "point": "0"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Consumer Behavior",
+            "description": "Shopping habits reveal a lot! How often do you shop online? Your insights guide us in providing better shopping experiences.",
+            "ordering": "3",
+            "questions": [
+                {
+                    "question": "How often do you shop online?",
+                    "type": "radio",
+                    "user_variant": "off",
+                    "ordering": "1",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Daily",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Weekly",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Monthly",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Rarely",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": ""
+                        }
+                    ]
+                },
+                {
+                    "question": "What factors influence your decision to purchase a product or service?",
+                    "type": "short_text",
+                    "user_variant": "off",
+                    "ordering": "2",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"Your answer\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": []
+                },
+                {
+                    "question": "Do you tend to research products/services before making a purchase?",
+                    "type": "yesorno",
+                    "user_variant": "off",
+                    "ordering": "3",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Yes",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "No",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": ""
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "title": "Media Consumption",
+            "description": "Content is king! Let us know how you prefer to consume content and what topics interest you the most.",
+            "ordering": "4",
+            "questions": [
+                {
+                    "question": "How do you prefer to consume content?",
+                    "type": "radio",
+                    "user_variant": "on",
+                    "ordering": "1",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "Reading articles",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Watching videos",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Listening to podcasts",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": ""
+                        }
+                    ]
+                },
+                {
+                    "question": "What types of content do you find most engaging or informative?",
+                    "type": "radio",
+                    "user_variant": "on",
+                    "ordering": "2",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": [
+                        {
+                            "answer": "News",
+                            "image": "",
+                            "ordering": "1",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Educational",
+                            "image": "",
+                            "ordering": "2",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Entertainment",
+                            "image": "",
+                            "ordering": "3",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Lifestyle",
+                            "image": "",
+                            "ordering": "4",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Technology",
+                            "image": "",
+                            "ordering": "5",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Health/Fitness",
+                            "image": "",
+                            "ordering": "6",
+                            "placeholder": "",
+                            "options": ""
+                        },
+                        {
+                            "answer": "Fashion/Beauty",
+                            "image": "",
+                            "ordering": "7",
+                            "placeholder": "",
+                            "options": ""
+                        }
+                    ]
+                },
+                {
+                    "question": "Are there any specific websites, blogs, or publications you regularly follow?",
+                    "type": "short_text",
+                    "user_variant": "off",
+                    "ordering": "3",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"Your answer\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": []
+                }
+            ]
+        },
+        {
+            "title": "Challenges and Pain Points",
+            "description": "We all face challenges! What are yours? Share your frustrations and pain points with us, so we can work on solutions that make your life easier.",
+            "ordering": "5",
+            "questions": [
+                {
+                    "question": "What are the biggest challenges you face in your daily life?",
+                    "type": "short_text",
+                    "user_variant": "off",
+                    "ordering": "1",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"Your answer\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": []
+                },
+                {
+                    "question": "Are there any frustrations or pain points you encounter when using products or services in your daily routine?",
+                    "type": "short_text",
+                    "user_variant": "off",
+                    "ordering": "2",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"Your answer\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": []
+                },
+                {
+                    "question": "What improvements or solutions would make your life easier?",
+                    "type": "text",
+                    "user_variant": "off",
+                    "ordering": "3",
+                    "options": "{\"required\":\"off\",\"collapsed\":\"expanded\",\"enable_max_selection_count\":\"off\",\"max_selection_count\":\"\",\"min_selection_count\":\"\",\"enable_word_limitation\":\"off\",\"limit_by\":\"char\",\"limit_length\":\"\",\"limit_counter\":\"off\",\"enable_number_limitation\":\"off\",\"number_min_selection\":\"\",\"number_max_selection\":\"\",\"number_error_message\":\"\",\"enable_number_error_message\":\"off\",\"number_limit_length\":\"\",\"enable_number_limit_counter\":\"off\",\"survey_input_type_placeholder\":\"Your answer\",\"image_caption\":\"\",\"image_caption_enable\":\"off\",\"with_editor\":\"off\"}",
+                    "question_description": "",
+                    "answers": []
+                }
+            ]
+        }
+    ]
+}
