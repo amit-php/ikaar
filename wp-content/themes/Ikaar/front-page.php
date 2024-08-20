@@ -573,26 +573,30 @@
             </div>
             <div class="row">
                 <?php
-                $wpnew = array(
-                    'post_type' => 'property',
-                    'post_status' => 'publish',
-                    'posts_per_page' => 6
-                );
-                $qprop = new WP_Query($wpnew);
-                while ($qprop->have_posts()) {
-                    $qprop->the_post();
+                    $dynamic_params = [
+                        'p_agency_filterid' => 1,
+                        'P_PageSize'=>6,
+                        'P_sandbox' => true
+                    ];
+                    $data = fetch_data_from_resales_api($dynamic_params);
+                    // echo "<pre/>";
+                    // print_r($data);
+                    // echo "<pre/>";
+                    if ($data["status"] === "success") {
+                        // Process and display the data
+                        foreach ($data["result"] as $key => $value) {
                     ?>
                     <div class="col-lg-4 col-md-6 category-item-box">
                         <div class="category-box position-relative">
                             <a href="<?php echo esc_url(get_permalink()); ?>">
                                 <div class="image-box position-relative">
                                     <?php
-                                    if (has_post_thumbnail()) {
-                                        echo get_the_post_thumbnail();
+                                    if ($value['Pictures']['Picture'][0]) {
+                                        echo "<img src='".$value['Pictures']['Picture'][0]['PictureURL']."' />";
                                     } ?>
                                     <div class="category-title">
                                         <h6>
-                                            <?php the_title(); ?>
+                                            <?php echo $value['PropertyType']['NameType']; ?>
                                         </h6>
                                     </div>
                                 </div>
@@ -602,14 +606,14 @@
                                     <ul class="d-flex align-items-center">
                                         <?php
                                         $bedrooms_image = get_theme_value('pro_bedrooms_image_icon');
-                                        $bwdrooms_qtt = get_field('bwdrooms_qtt');
+                                        $bwdrooms_qtt = $value['Bedrooms'];
                                         $bathroom_image = get_theme_value('pro_bathrooms_image_icon');
-                                        $bathrooms_qtt = get_field('bathrooms_qtt');
+                                        $bathrooms_qtt = $value['Bathrooms'];
                                         $sq_ft_image = get_theme_value('pro_squ_imag_icon');
-                                        $property_area_sq = get_field('property_area_sq');
+                                        $property_area_sq = $value['Built'].'m²';
                                         $terrace_img = get_theme_value('pro_terrace_image_icon');
-                                        $temperature = get_field('temperature');
-                                        $property_price = get_field('property_price');
+                                        $temperature = 0;
+                                        $property_price = $value['OriginalPrice'];
                                         if (!empty($bwdrooms_qtt)) { ?>
                                             <li><span><img src="<?php echo $bedrooms_image; ?>" alt=""></span>
                                                 <?php echo $bwdrooms_qtt; ?>
@@ -639,7 +643,7 @@
                                     <?php
                                     if (!empty($property_price)) { ?>
                                         <span>
-                                            <?php echo number_format($property_price); ?>
+                                            <?php echo $property_price ; ?>
                                         </span>
                                     <?php } ?>
                                 </div>
@@ -648,7 +652,7 @@
                     </div>
                     <?php
                 }
-                wp_reset_postdata();
+            }
                 ?>
             </div>
             <?php $view_all_recommended_propertise = get_field("view_all_recommended_propertise");

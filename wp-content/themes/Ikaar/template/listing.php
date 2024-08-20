@@ -244,14 +244,8 @@ get_header();
         </div>
     </section>
     <!-- filter posts end -->
-    <?php
-    $transferredData = $_GET['service'];
-    $type_slug = [];
-    $type_slug = $_GET['location'];
-    //print_r($type_slug);
     
-    ?>
-    <section class="recommendations-section common-padding-top">
+    <section class="recommendations-section common-padding">
         <div class="container">
             <div class="title-heading text-center">
                 <?php $title_latest_prop = get_field("title_latest_prop");
@@ -260,283 +254,102 @@ get_header();
                         <?php echo $title_latest_prop; ?>
                     </h3>
                 <?php } ?>
-                <?php $sub_title_latestProp = get_field("sub_title_latestProp");
-                if ($sub_title_latestProp != "") { ?>
+                <?php $sub_title_latest_prop = get_field("sub_title_latest_prop");
+                if ($sub_title_latest_prop != "") { ?>
                     <p>
-                        <?php echo $sub_title_latestProp; ?>
+                        <?php echo $sub_title_latest_prop; ?>
                     </p>
                 <?php } ?>
             </div>
-            <?php if (!empty($transferredData)) { ?>
-                <div class="row propClass" id="filterprop">
-                    <?php
-                    $wpnew = array(
-                        'post_type' => 'property',
-                        'post_status' => 'publish',
-                        //'posts_per_page' => 3
-                        'meta_query' => array(
-                            array(
-                                'key' => 'service_type',
-                                'value' => $transferredData,
-                            ),
-                        ),
-                    );
-                    $qprop = new WP_Query($wpnew);
-                    if ($qprop->have_posts()) {
-                        while ($qprop->have_posts()) {
-                            $qprop->the_post();
-                            ?>
-                            <div class="col-lg-4 col-md-6 category-item-box">
-                                <div class="category-box position-relative">
-                                    <a href="<?php echo esc_url(get_permalink()); ?>">
-                                        <div class="image-box position-relative">
-                                            <?php
-                                            if (has_post_thumbnail()) {
-                                                echo get_the_post_thumbnail();
-                                            } ?>
-                                            <div class="category-title">
-                                                <h6>
-                                                    <?php the_title(); ?>
-                                                </h6>
-                                            </div>
-                                        </div>
-                                    </a>
-                                    <div class="category-list-row d-flex align-items-center justify-content-between">
-                                        <div class="provide-item-row">
-                                            <ul class="d-flex align-items-center">
-                                                <?php
-                                                $bedrooms_image = get_theme_value('pro_bedrooms_image_icon');
-                                                $bwdrooms_qtt = get_field('bwdrooms_qtt');
-                                                $bathroom_image = get_theme_value('pro_bathrooms_image_icon');
-                                                $bathrooms_qtt = get_field('bathrooms_qtt');
-                                                $sq_ft_image = get_theme_value('pro_squ_imag_icon');
-                                                $property_area_sq = get_field('property_area_sq');
-                                                $terrace_img = get_theme_value('pro_terrace_image_icon');
-                                                $temperature = get_field('temperature');
-                                                $property_price = get_field('property_price');
-                                                if (!empty($bwdrooms_qtt)) { ?>
-                                                    <li><span><img src="<?php echo $bedrooms_image; ?>" alt=""></span>
-                                                        <?php echo $bwdrooms_qtt; ?>
-                                                    </li>
-                                                <?php }
-                                                if (!empty($bathrooms_qtt)) { ?>
-                                                    <li><span><img src="<?php echo $bathroom_image; ?>" alt=""></span>
-                                                        <?php echo $bathrooms_qtt; ?>
-                                                    </li>
-                                                <?php }
-                                                if (!empty($property_area_sq)) { ?>
-                                                    <li><span><img src="<?php echo $sq_ft_image; ?>" alt=""></span>
-                                                        <?php echo $property_area_sq; ?>
-                                                    </li>
-                                                <?php }
-                                                if (!empty($temperature)) { ?>
-                                                    <li><span><img src="<?php echo $terrace_img; ?>" alt=""></span>
-                                                        <?php echo $temperature; ?>
-                                                    </li>
-                                                <?php } ?>
-                                            </ul>
-                                        </div>
-                                        <div class="total-price-row">
-                                            <span>
-                                                <?php echo get_theme_value('pro_currency'); ?>
-                                            </span>
-                                            <?php
-                                            if (!empty($property_price)) { ?>
-                                                <span>
-                                                    <?php echo number_format($property_price); ?>
-                                                </span>
-                                            <?php } ?>
-                                        </div>
+            <div class="row propClass">
+                <?php
+                    $dynamic_params = [
+                        'p_agency_filterid' => 1,
+                        'P_PageSize'=>3,
+                        'P_sandbox' => true
+                    ];
+                    $data = fetch_data_from_resales_api($dynamic_params);
+                   // echo "<pre/>";
+                    //print_r($data);
+                   // die;
+                    if ($data["status"] === "success") {
+                        // Process and display the data
+                        foreach ($data["result"] as $key => $value) {
+                    ?>
+                    <div class="col-lg-4 col-md-6 category-item-box">
+                        <div class="category-box position-relative">
+                            <a href="<?php echo esc_url(get_permalink()); ?>">
+                                <div class="image-box position-relative">
+                                    <?php
+                                    if ($value['Pictures']['Picture'][0]) {
+                                        echo "<img src='".$value['Pictures']['Picture'][0]['PictureURL']."' />";
+                                    } ?>
+                                    <div class="category-title">
+                                        <h6>
+                                            <?php echo $value['PropertyType']['NameType']; ?>
+                                        </h6>
                                     </div>
+                                </div>
+                            </a>
+                            <div class="category-list-row d-flex align-items-center justify-content-between">
+                                <div class="provide-item-row">
+                                    <ul class="d-flex align-items-center">
+                                        <?php
+                                        $bedrooms_image = get_theme_value('pro_bedrooms_image_icon');
+                                        $bwdrooms_qtt = $value['Bedrooms'];
+                                        $bathroom_image = get_theme_value('pro_bathrooms_image_icon');
+                                        $bathrooms_qtt = $value['Bathrooms'];
+                                        $sq_ft_image = get_theme_value('pro_squ_imag_icon');
+                                        $property_area_sq = $value['Built'].'m²';
+                                        $terrace_img = get_theme_value('pro_terrace_image_icon');
+                                        $temperature = 0;
+                                        $property_price = $value['OriginalPrice'];
+                                        if (!empty($bwdrooms_qtt)) { ?>
+                                            <li><span><img src="<?php echo $bedrooms_image; ?>" alt=""></span>
+                                                <?php echo $bwdrooms_qtt; ?>
+                                            </li>
+                                        <?php }
+                                        if (!empty($bathrooms_qtt)) { ?>
+                                            <li><span><img src="<?php echo $bathroom_image; ?>" alt=""></span>
+                                                <?php echo $bathrooms_qtt; ?>
+                                            </li>
+                                        <?php }
+                                        if (!empty($property_area_sq)) { ?>
+                                            <li><span><img src="<?php echo $sq_ft_image; ?>" alt=""></span>
+                                                <?php echo $property_area_sq; ?>
+                                            </li>
+                                        <?php }
+                                        if (!empty($temperature)) { ?>
+                                            <li><span><img src="<?php echo $terrace_img; ?>" alt=""></span>
+                                                <?php echo $temperature; ?>
+                                            </li>
+                                        <?php } ?>
+                                    </ul>
+                                </div>
+                                <div class="total-price-row">
+                                    <span>
+                                        <?php echo get_theme_value('pro_currency'); ?>
+                                    </span>
+                                    <?php
+                                    if (!empty($property_price)) { ?>
+                                        <span>
+                                            <?php echo $property_price ; ?>
+                                        </span>
+                                    <?php } ?>
                                 </div>
                             </div>
-                            <?php
-                        }
-                        wp_reset_postdata();
-                    }
-                    ?>
-                </div>
-            <?php } else if (!empty($type_slug)) { ?>
-                    <div class="row propClass" id="filterprop">
-                        <?php
-                        $wpnew = array(
-                            'post_type' => 'property',
-                            'post_status' => 'publish',
-                            'posts_per_page' => -1,
-                            'tax_query' => array(
-                                    array(
-                                        'taxonomy' => 'property_location', // Replace with your custom taxonomy slug
-                                        'field' => 'id',
-                                        'terms' => $type_slug,
-                                        'operator' => 'IN',
-                                    ),
-                                ),
-                        );
-                        $qprop = new WP_Query($wpnew);
-                        if ($qprop->have_posts()) {
-                            while ($qprop->have_posts()) {
-                                $qprop->the_post();
-                                ?>loc
-                                <div class="col-lg-4 col-md-6 category-item-box">
-                                    <div class="category-box position-relative">
-                                        <a href="<?php echo esc_url(get_permalink()); ?>">
-                                            <div class="image-box position-relative">
-                                                <?php
-                                                if (has_post_thumbnail()) {
-                                                    echo get_the_post_thumbnail();
-                                                } ?>
-                                                <div class="category-title">
-                                                    <h6>
-                                                    <?php the_title(); ?>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="category-list-row d-flex align-items-center justify-content-between">
-                                            <div class="provide-item-row">
-                                                <ul class="d-flex align-items-center">
-                                                    <?php
-                                                    $bedrooms_image = get_theme_value('pro_bedrooms_image_icon');
-                                                    $bwdrooms_qtt = get_field('bwdrooms_qtt');
-                                                    $bathroom_image = get_theme_value('pro_bathrooms_image_icon');
-                                                    $bathrooms_qtt = get_field('bathrooms_qtt');
-                                                    $sq_ft_image = get_theme_value('pro_squ_imag_icon');
-                                                    $property_area_sq = get_field('property_area_sq');
-                                                    $terrace_img = get_theme_value('pro_terrace_image_icon');
-                                                    $temperature = get_field('temperature');
-                                                    $property_price = get_field('property_price');
-                                                    if (!empty($bwdrooms_qtt)) { ?>
-                                                        <li><span><img src="<?php echo $bedrooms_image; ?>" alt=""></span>
-                                                        <?php echo $bwdrooms_qtt; ?>
-                                                        </li>
-                                                <?php }
-                                                    if (!empty($bathrooms_qtt)) { ?>
-                                                        <li><span><img src="<?php echo $bathroom_image; ?>" alt=""></span>
-                                                        <?php echo $bathrooms_qtt; ?>
-                                                        </li>
-                                                <?php }
-                                                    if (!empty($property_area_sq)) { ?>
-                                                        <li><span><img src="<?php echo $sq_ft_image; ?>" alt=""></span>
-                                                        <?php echo $property_area_sq; ?>
-                                                        </li>
-                                                <?php }
-                                                    if (!empty($temperature)) { ?>
-                                                        <li><span><img src="<?php echo $terrace_img; ?>" alt=""></span>
-                                                        <?php echo $temperature; ?>
-                                                        </li>
-                                                <?php } ?>
-                                                </ul>
-                                            </div>
-                                            <div class="total-price-row">
-                                                <span>
-                                                <?php echo  get_theme_value('pro_currency'); ?>
-                                                </span>
-                                                <?php
-                                                if (!empty($property_price)) { ?>
-                                                    <span>
-                                                    <?php echo number_format($property_price); ?>
-                                                    </span>
-                                            <?php } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                            }
-                            wp_reset_postdata();
-                        }
-                        ?>
+                        </div>
                     </div>
-
-            <?php } else { ?>
-                    <div class="row propClass" id="filterprop">
-                        <?php
-                        $wpnew = array(
-                            'post_type' => 'property',
-                            'post_status' => 'publish',
-                            'posts_per_page' => 3
-                        );
-                        $qprop = new WP_Query($wpnew);
-                        if ($qprop->have_posts()) {
-                            while ($qprop->have_posts()) {
-                                $qprop->the_post();
-                                ?>
-                                <div class="col-lg-4 col-md-6 category-item-box">
-                                    <div class="category-box position-relative">
-                                        <a href="<?php echo esc_url(get_permalink()); ?>">
-                                            <div class="image-box position-relative">
-                                            <?php if (has_post_thumbnail()) {
-                                                echo get_the_post_thumbnail();
-                                            } ?>
-                                                <div class="category-title">
-                                                    <h6>
-                                                    <?php the_title(); ?>
-                                                    </h6>
-                                                </div>
-                                            </div>
-                                        </a>
-                                        <div class="category-list-row d-flex align-items-center justify-content-between">
-                                            <div class="provide-item-row">
-                                                <ul class="d-flex align-items-center">
-                                                    <?php
-                                                    $bedrooms_image = get_theme_value('pro_bedrooms_image_icon');
-                                                    $bwdrooms_qtt = get_field('bwdrooms_qtt');
-                                                    $bathroom_image = get_theme_value('pro_bathrooms_image_icon');
-                                                    $bathrooms_qtt = get_field('bathrooms_qtt');
-                                                    $sq_ft_image = get_theme_value('pro_squ_imag_icon');
-                                                    $property_area_sq = get_field('property_area_sq');
-                                                    $terrace_img = get_theme_value('pro_terrace_image_icon');
-                                                    $temperature = get_field('temperature');
-                                                    $property_price = get_field('property_price');
-                                                    if (!empty($bwdrooms_qtt)) { ?>
-                                                        <li><span><img src="<?php echo $bedrooms_image; ?>" alt=""></span>
-                                                        <?php echo $bwdrooms_qtt; ?>
-                                                        </li>
-                                                <?php }
-                                                    if (!empty($bathrooms_qtt)) { ?>
-                                                        <li><span><img src="<?php echo $bathroom_image; ?>" alt=""></span>
-                                                        <?php echo $bathrooms_qtt; ?>
-                                                        </li>
-                                                <?php }
-                                                    if (!empty($property_area_sq)) { ?>
-                                                        <li><span><img src="<?php echo $sq_ft_image; ?>" alt=""></span>
-                                                        <?php echo $property_area_sq; ?>
-                                                        </li>
-                                                <?php }
-                                                    if (!empty($temperature)) { ?>
-                                                        <li><span><img src="<?php echo $terrace_img; ?>" alt=""></span>
-                                                        <?php echo $temperature; ?>
-                                                        </li>
-                                                <?php } ?>
-                                                </ul>
-                                            </div>
-                                            <div class="total-price-row">
-                                                <span>
-                                                <?php echo get_theme_value('pro_currency'); ?>
-                                                </span>
-                                                <?php
-                                                if (!empty($property_price)) { ?>
-                                                    <span>
-                                                    <?php echo number_format($property_price); ?>
-                                                    </span>
-                                            <?php } ?>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            <?php
-                            }
-                            wp_reset_postdata();
-                        }
-                        ?>
-                    </div>
-                    <div class="button-wrap text-center" id="loadhide">
+                    <?php
+                }
+            }
+                ?>
+            </div>
+            <div class="button-wrap text-center" id="loadhide">
                         <a href="javascript:void(0)" class="btn" id="LoadMoreProp">
                         <?php echo get_theme_value("load_more_button"); ?>
                         </a>
-                    </div>
-            <?php } ?>
-
+            </div>
         </div>
     </section>
 
@@ -549,12 +362,17 @@ get_header();
         jQuery(function ($) {
             var loadMoreButton = $('#LoadMoreProp');
             var paged = 2;
+            let queryid = "<?php echo $data['queryinfo']['QueryId'] ; ?>"
+            let postperpage = 3 ;
             var container = $('.propClass');
 
             function loadposts() {
                 var data = {
                     'action': 'load_more_postsProperty',
                     'paged': paged,
+                    'queryid':queryid,
+                    'postperpage':postperpage,
+
                 };
 
                 $.ajax({
@@ -563,11 +381,14 @@ get_header();
                     dataType: 'json',
                     data: data,
                     success: function (response) {
-                        if (paged >= response.max) {
-                            $('#LoadMoreProp').hide();
-                        }
+                        console.log(response.queryinfo.QueryId);
+                        // if (paged >= response.max) {
+                        //     $('#LoadMoreProp').hide();
+                        // }
                         container.append(response.html);
+                        queryid = response.queryinfo.QueryId;
                         paged++;
+                      
                     }
                 });
             }

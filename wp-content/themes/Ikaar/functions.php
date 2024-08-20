@@ -20,6 +20,11 @@ foreach (glob(get_template_directory() . '/inc/post-types/*.php') as $file) {
 	include_once $file;
 }
 
+//for fetching api
+foreach (glob(get_template_directory() . '/resales-web-api/*.php') as $file) {
+	include_once $file;
+}
+
 
 function weaversweb_ftn_wp_enqueue_scripts()
 {
@@ -215,100 +220,100 @@ add_action('wp_ajax_nopriv_load_more_posts', 'load_more_posts');
 
 
 //ajax Load more for Property Listing
+function load_more_postsProperty() {
+	$page        = $_POST['paged'];
+	$queryid     = $_POST['queryid'];
+	$postperpage = $_POST['postperpage'];
 
-
-function load_more_postsProperty()
-{
-	$args2 = [
-		'post_type' => 'property',
-		'posts_per_page' => 3,
-		'paged' => $_POST['paged'],
-		'post_status' => 'publish',
+	$dynamic_params = [
+		'p_agency_filterid' => 1,
+		'P_PageSize'=>$postperpage,
+		'P_PageNo'=>$page, 
+		'P_QueryId'=>$queryid,
+		'P_sandbox' => true
 	];
-
-	$my_post2 = new WP_Query($args2);
-	$nex_pages2 = $my_post2->max_num_pages;
-
-	if ($my_post2->have_posts()) {
-		ob_start();
-		while ($my_post2->have_posts()) {
-			$my_post2->the_post(); ?>
-			<div class="col-lg-4 col-md-6 category-item-box">
-				<div class="category-box position-relative">
-					<a href="<?php echo esc_url(get_permalink()); ?>">
-						<div class="image-box position-relative">
-							<?php
-							if (has_post_thumbnail()) {
-								echo get_the_post_thumbnail();
-							} ?>
-							<div class="category-title">
-								<h6>
-									<?php the_title(); ?>
-								</h6>
-							</div>
-						</div>
-					</a>
-					<div class="category-list-row d-flex align-items-center justify-content-between">
-						<div class="provide-item-row">
-							<ul class="d-flex align-items-center">
-								<?php
-								$bedrooms_image = get_theme_value('pro_bedrooms_image_icon');
-								$bwdrooms_qtt = get_field('bwdrooms_qtt');
-								$bathroom_image = get_theme_value('pro_bathrooms_image_icon');
-								$bathrooms_qtt = get_field('bathrooms_qtt');
-								$sq_ft_image = get_theme_value('pro_squ_imag_icon');
-								$property_area_sq = get_field('property_area_sq');
-								$terrace_img = get_theme_value('pro_terrace_image_icon');
-								$temperature = get_field('temperature');
-								$property_price = get_field('property_price');
-								if (!empty($bwdrooms_qtt)) { ?>
-									<li><span><img src="<?php echo $bedrooms_image; ?>" alt=""></span>
-										<?php echo $bwdrooms_qtt; ?>
-									</li>
-								<?php }
-								if (!empty($bathrooms_qtt)) { ?>
-									<li><span><img src="<?php echo $bathroom_image; ?>" alt=""></span>
-										<?php echo $bathrooms_qtt; ?>
-									</li>
-								<?php }
-								if (!empty($property_area_sq)) { ?>
-									<li><span><img src="<?php echo $sq_ft_image; ?>" alt=""></span>
-										<?php echo $property_area_sq; ?>
-									</li>
-								<?php }
-								if (!empty($temperature)) { ?>
-									<li><span><img src="<?php echo $terrace_img; ?>" alt=""></span>
-										<?php echo $temperature; ?>
-									</li>
-								<?php } ?>
-							</ul>
-						</div>
-						<div class="total-price-row">
-							<span>
-								<?php echo get_theme_value('pro_currency'); ?>
-							</span>
-							<?php
-							if (!empty($property_price)) { ?>
-								<span>
-									<?php echo number_format($property_price); ?>
-								</span>
-							<?php } ?>
-						</div>
+	$data = fetch_data_from_resales_api($dynamic_params);
+	if ($data["status"] === "success") {
+		// Process and display the data
+		foreach ($data["result"] as $key => $value) {
+	?>
+	<div class="col-lg-4 col-md-6 category-item-box">
+		<div class="category-box position-relative">
+			<a href="<?php echo esc_url(get_permalink()); ?>">
+				<div class="image-box position-relative">
+					<?php
+					if ($value['Pictures']['Picture'][0]) {
+						echo "<img src='".$value['Pictures']['Picture'][0]['PictureURL']."' />";
+					} ?>
+					<div class="category-title">
+						<h6>
+							<?php echo $value['PropertyType']['NameType']; ?>
+						</h6>
 					</div>
 				</div>
+			</a>
+			<div class="category-list-row d-flex align-items-center justify-content-between">
+				<div class="provide-item-row">
+					<ul class="d-flex align-items-center">
+						<?php
+						$bedrooms_image = get_theme_value('pro_bedrooms_image_icon');
+						$bwdrooms_qtt = $value['Bedrooms'];
+						$bathroom_image = get_theme_value('pro_bathrooms_image_icon');
+						$bathrooms_qtt = $value['Bathrooms'];
+						$sq_ft_image = get_theme_value('pro_squ_imag_icon');
+						$property_area_sq = $value['Built'].'m²';
+						$terrace_img = get_theme_value('pro_terrace_image_icon');
+						$temperature = 0;
+						$property_price = $value['OriginalPrice'];
+						if (!empty($bwdrooms_qtt)) { ?>
+							<li><span><img src="<?php echo $bedrooms_image; ?>" alt=""></span>
+								<?php echo $bwdrooms_qtt; ?>
+							</li>
+						<?php }
+						if (!empty($bathrooms_qtt)) { ?>
+							<li><span><img src="<?php echo $bathroom_image; ?>" alt=""></span>
+								<?php echo $bathrooms_qtt; ?>
+							</li>
+						<?php }
+						if (!empty($property_area_sq)) { ?>
+							<li><span><img src="<?php echo $sq_ft_image; ?>" alt=""></span>
+								<?php echo $property_area_sq; ?>
+							</li>
+						<?php }
+						if (!empty($temperature)) { ?>
+							<li><span><img src="<?php echo $terrace_img; ?>" alt=""></span>
+								<?php echo $temperature; ?>
+							</li>
+						<?php } ?>
+					</ul>
+				</div>
+				<div class="total-price-row">
+					<span>
+						<?php echo get_theme_value('pro_currency'); ?>
+					</span>
+					<?php
+					if (!empty($property_price)) { ?>
+						<span>
+							<?php echo $property_price ; ?>
+						</span>
+					<?php } ?>
+				</div>
 			</div>
-		<?php }
-		$output2 = ob_get_contents();
-		ob_end_clean();
-		wp_reset_postdata();
-	}
-	$result2 = [
-		'max' => $nex_pages2,
-		'html' => $output2,
-	];
-
-	echo json_encode($result2);
-	wp_die();
+		</div>
+	</div>
+	
+	<?php
+     }
+        $output2 = ob_get_contents();
+		ob_end_clean();	
+    }
+$result2 = [
+			'queryinfo' => $data['queryinfo'],
+			'html' => $output2,
+		];
+	
+		echo json_encode($result2);
+		wp_die();
 }
 
 add_action('wp_ajax_load_more_postsProperty', 'load_more_postsProperty');

@@ -607,6 +607,29 @@ if (!function_exists('weaversweb_ftn_options')) {
 				"type" => "text"
 			),
 			/* google end*/
+          
+		   /* resell Api */
+			array(
+				"name" => "Resales Web API V6",
+				"type" => "heading"
+			),
+
+			array(
+				"name" => "p1 identifier",
+				"desc" => "Enter unique id",
+				"id" => "identifier_id",
+				"std" => "",
+				"type" => "text"
+			),
+			array(
+				"name" => "API Key",
+				"desc" => "Enter unique key",
+				"id" => "unique_api_key",
+				"std" => "",
+				"type" => "text"
+			),
+			/* resell end*/
+
 		);
 		weaversweb_ftn_update_option('of_template', $options);
 	}
