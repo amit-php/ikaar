@@ -588,7 +588,7 @@
                     ?>
                     <div class="col-lg-4 col-md-6 category-item-box">
                         <div class="category-box position-relative">
-                            <a href="<?php echo esc_url(get_permalink()); ?>">
+                            <a href="<?php echo esc_url(get_the_permalink(1417)).'?refid='.$value['Reference']; ?>">
                                 <div class="image-box position-relative">
                                     <?php
                                     if ($value['Pictures']['Picture'][0]) {

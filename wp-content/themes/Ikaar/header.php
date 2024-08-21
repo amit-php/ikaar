@@ -20,7 +20,7 @@
 
    <!-- header section start -->
    <?php
-   if (is_page(374) || is_page(113) || is_page(3) || is_page(477) || is_singular('property') || is_tax('property_type') || is_tax('property_location')) {
+   if (is_page(1417) || is_page(374) || is_page(113) || is_page(3) || is_page(477) || is_singular('property') || is_tax('property_type') || is_tax('property_location')) {
       $class = "inner-header";
    } else {
       $class = "";

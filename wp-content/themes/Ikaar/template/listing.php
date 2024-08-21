@@ -265,20 +265,20 @@ get_header();
                 <?php
                     $dynamic_params = [
                         'p_agency_filterid' => 1,
-                        'P_PageSize'=>3,
+                        'P_PageSize'=>9,
                         'P_sandbox' => true
                     ];
                     $data = fetch_data_from_resales_api($dynamic_params);
                    // echo "<pre/>";
                     //print_r($data);
-                   // die;
+                    //die;
                     if ($data["status"] === "success") {
                         // Process and display the data
                         foreach ($data["result"] as $key => $value) {
                     ?>
                     <div class="col-lg-4 col-md-6 category-item-box">
                         <div class="category-box position-relative">
-                            <a href="<?php echo esc_url(get_permalink()); ?>">
+                            <a href="<?php echo esc_url(get_the_permalink(1417)).'?refid='.$value['Reference']; ?>">
                                 <div class="image-box position-relative">
                                     <?php
                                     if ($value['Pictures']['Picture'][0]) {
@@ -349,7 +349,12 @@ get_header();
                         <a href="javascript:void(0)" class="btn" id="LoadMoreProp">
                         <?php echo get_theme_value("load_more_button"); ?>
                         </a>
+                 <button class="btn  text-center" type="button"  id="loding-btn">
+                   <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                   Loading...
+                </button>
             </div>
+
         </div>
     </section>
 
@@ -359,14 +364,17 @@ get_header();
 </main>
 <script>
     jQuery(document).ready(function ($) {
+        $('#loding-btn').hide();
         jQuery(function ($) {
             var loadMoreButton = $('#LoadMoreProp');
-            var paged = 2;
+            var paged = 4;
             let queryid = "<?php echo $data['queryinfo']['QueryId'] ; ?>"
             let postperpage = 3 ;
             var container = $('.propClass');
 
             function loadposts() {
+                $('#LoadMoreProp').hide();
+                $('#loding-btn').show();
                 var data = {
                     'action': 'load_more_postsProperty',
                     'paged': paged,
@@ -381,14 +389,13 @@ get_header();
                     dataType: 'json',
                     data: data,
                     success: function (response) {
-                        console.log(response.queryinfo.QueryId);
-                        // if (paged >= response.max) {
-                        //     $('#LoadMoreProp').hide();
-                        // }
+                        console.log(response.queryinfo);
+                      
                         container.append(response.html);
                         queryid = response.queryinfo.QueryId;
                         paged++;
-                      
+                        $('#LoadMoreProp').show();
+                        $('#loding-btn').hide();
                     }
                 });
             }
