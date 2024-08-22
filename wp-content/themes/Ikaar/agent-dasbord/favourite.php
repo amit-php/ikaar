@@ -16,17 +16,29 @@ get_header('dashboard'); ?>
                         <div class="card-blog-wraper">
                             <div class="row">
                                 <?php
-                               $user_id = $current_user->ID;
-                               $user_new_data = get_user_meta($user_id, '_iswishlist');
-                                foreach ($user_new_data as $post_id) {
-                                    $post = get_post($post_id);
+                                $user_id = $current_user->ID;
+                                $user_new_data = get_user_meta($user_id, '_iswishlist');
+                                //print_r($user_new_data);
+                                foreach ($user_new_data as $refid) {
+                                    $dynamic_params = [
+                                        'p_agency_filterid' => 1,
+                                        'P_sandbox' => true,
+                                        'P_RefId' =>  $refid ,
+                                        'P_ShowGPSCoords' => TRUE,
+                                        'P_showdecree218' => "YES",
+                                    ];
+                                    $data = fetch_data_from_resales_api($dynamic_params);
                                     // echo $post . '<br>';
                                     // print_r($post);
-                                    if ($post) {
-                                        $post_title = $post->post_title;
-                                        $post_content = $post->post_content;
-                                        $post_permalink = get_permalink($post_id->ID);
-                                        $post_thumbnail = has_post_thumbnail($post_id) ? get_the_post_thumbnail($post_id, 'thumbnail') : get_template_directory_uri() . '/assets/auth/images/default-image.jpg';
+                                    if ($data) {
+                                        $propertyDetails = $data['result'][0];
+                                        $imgs = $data['result'][0]['Pictures']['Picture'];
+                                        $location = 'sale in '.$propertyDetails['Province'].','.$propertyDetails['Area'];
+                                        $propertyName = $propertyDetails['PropertyType']['NameType'].' '.$location; 
+                                        $post_title = $propertyName;
+                                        $post_content = $propertyDetails['Description'];
+                                        $post_permalink = esc_url(get_the_permalink(1417)).'?refid='.$propertyDetails['Reference'];
+                                        $post_thumbnail = !empty($imgs) ? $imgs[0]['PictureURL'] : get_template_directory_uri() . '/assets/auth/images/default-image.jpg';
 
                                 ?>
                                         <div class="col-md-6 card-blog-item">
@@ -34,50 +46,35 @@ get_header('dashboard'); ?>
                                                 <a href="<?php echo esc_url($post_permalink); ?>">
                                                     <div class="card-blog-row d-flex align-items-start">
 
-                                                        <div class="image-box">
-                                                            <?php echo $post_thumbnail ?>
-                                                        </div>
+                                                        <div class="image-box"><img src="<?php echo $post_thumbnail ?>" /></div>
 
                                                         <div class="info-box">
-
                                                             <h6><?php echo $post_title; ?></h6>
-
                                                             <div class="location-wrap">
                                                                 <ul class="d-flex">
-                                                                    <?php
-                                                                    $taxonomy = 'property_location';
-                                                                    $terms = get_the_terms(get_the_ID(), $taxonomy);
-                                                                    if ($terms && !is_wp_error($terms)) {
-                                                                        foreach ($terms as $term) {
-                                                                            // print_r($term);
-                                                                            $name = $term->name;
-                                                                            $term_link = get_term_link($term);
-                                                                    ?>
-                                                                            <li><a href="<?php echo esc_url($term_link); ?>">
-                                                                                    <?php echo $name; ?>
-                                                                                </a></li>
-                                                                    <?php
-                                                                        }
-                                                                    }
-                                                                    ?>
-                                                                    <li> <?php echo get_field('ref_no'); ?></li>
+                                                                   
+                                                                            <li>
+                                                                                    <?php echo $propertyDetails['Location']; ?>
+                                                                                </li>
+                                                                    
+                                                                    <li> <?php echo $propertyDetails['Reference']; ?></li>
                                                                 </ul>
                                                             </div>
                                                             <div class="provide-item-row">
                                                                 <ul class="d-flex align-items-center">
-                                                                    <li><span><img src="<?php echo get_field('bedrooms_image'); ?>" alt=""></span> <?php echo get_field('bwdrooms_qtt'); ?></li>
-                                                                    <li><span><img src="<?php echo get_field('bathroom_image'); ?>" alt=""></span> <?php echo get_field('bathrooms_qtt'); ?></li>
+                                                                    <li><span><img src="<?php echo get_theme_value('pro_bedrooms_image_icon'); ?>" alt=""></span> <?php echo $propertyDetails['Bedrooms']; ?></li>
+                                                                    <li><span><img src="<?php echo get_theme_value('pro_bathrooms_image_icon'); ?>" alt=""></span><?php echo $propertyDetails['Bathrooms']; ?></li>
                                                                 </ul>
                                                             </div>
-                                                            <h6 class="price-wrap"> <?php echo get_field('currency'); ?> <?php echo get_field('property_price'); ?></h6>
+                                                            <h6 class="price-wrap"> <?php echo get_theme_value('pro_currency'); ?> <?php echo $propertyDetails['OriginalPrice']; ?></h6>
                                                             <div class="bottom-row">
                                                                 <div class="size-box">
-                                                                    <p><strong>Built Size:</strong>  <?php echo get_field('built_size'); ?>sqft</p>
-                                                                    <p><strong>Terrace Size:</strong>  <?php echo get_field('terrace_size:'); ?></p>
+                                                                    <p><strong>Built Size:</strong><?php echo $propertyDetails['Built'].'m²'; ?></p>
+                                                                    <p><strong>Terrace Size:</strong><?php echo $propertyDetails['Terrace'].'m²'; ?></p>
                                                                 </div>
                                                                 <div class="button-holder">
                                                                     <ul class="d-flex">
-                                                                    <li><a href="javascript:void(0)" onclick="Addtowishlist('<?php echo $post->ID ;?>','no')"><i class="fa fa-trash" aria-hidden="true" style="color:black"></i></a></li>
+                                                                    <li><a href="javascript:void(0)" onclick="Addtowishlist('<?php echo $propertyDetails['Reference'] ;?>','no')"><i class="fa fa-trash" aria-hidden="true" style="color:black"></i></a></li>
                                                                     </ul>
                                                                 </div>
                                                             </div>
@@ -88,7 +85,7 @@ get_header('dashboard'); ?>
                                         </div>
                                 <?php
                                     }
-                                    wp_reset_postdata();
+                                   // wp_reset_postdata();
                                 }
                                 ?>
                             </div>
