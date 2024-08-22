@@ -263,11 +263,21 @@ get_header();
             </div>
             <div class="row propClass">
                 <?php
+                $optionValue = $_GET['ov'];
+                if($optionValue){
+                    $dynamic_params = [
+                        'p_agency_filterid' => 1,
+                        'P_PageSize'=>9,
+                        'P_sandbox' => true,
+                        'P_PropertyTypes' => $optionValue
+                    ];
+                } else {
                     $dynamic_params = [
                         'p_agency_filterid' => 1,
                         'P_PageSize'=>9,
                         'P_sandbox' => true
                     ];
+                }
                     $data = fetch_data_from_resales_api($dynamic_params);
                    // echo "<pre/>";
                     //print_r($data);

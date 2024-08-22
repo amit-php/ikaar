@@ -65,7 +65,8 @@ if($data) {
 } else {
     $propertyDetails = NULL;
 }
-
+//echo "<pre>";
+//print_r($propertyDetails);
 ?>
 <!-- body section start -->
 <div id="loader"><img src="<?php echo home_url(); ?>/wp-content/uploads/2024/03/loading-gif-800x600-1.gif" height="100" /></div>

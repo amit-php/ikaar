@@ -9,6 +9,8 @@ function fetch_data_from_resales_api($dynamic_params) {
     $fixed_params = [
         'p1' => get_theme_value('identifier_id'),
         'p2' => get_theme_value('unique_api_key'),
+        'P_Dimension'=>1,
+        'P_Currency'=>'EUR',
     ];
 
     // Combine fixed and dynamic parameters

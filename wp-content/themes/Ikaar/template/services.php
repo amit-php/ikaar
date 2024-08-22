@@ -1,7 +1,14 @@
 <?php
 //Template Name:Services
 get_header();
+$propertyTypes = dynamic_property_type_search();
+//echo "<pre/>";
+//print_r($propertyTypes);
+
+$types = $propertyTypes['PropertyTypes']['PropertyType'];
 ?>
+
+
 
 <main>
     <section class="hero-banner inner-banner position-relative">
@@ -23,31 +30,32 @@ get_header();
     <section class="service-section body-bg common-padding-top">
         <div class="container">
             <div class="row">
-                <?php
-                $wpnew = array(
-                    'post_type' => 'services',
-                    'post_status' => 'publish',
-                    'posts_per_page' => -1
-                );
-                $q = new WP_Query($wpnew);
-                while ($q->have_posts()) {
-                    $q->the_post();
-                ?>
-                    <div class="col-lg-4 col-md-6 service-item-box">
-                        <a href="<?php the_permalink(); ?>">
-                            <div class="service-box">
-                                <div class="image-box">
-                                    <?php echo get_the_post_thumbnail(); ?> </div>
-                                <div class="title-box">
-                                    <h3> <?php the_title(); ?></h3>
-                                </div>
-                            </div>
-                        </a>
+            <div class="container mt-5">
+    <div class="row">
+        <?php foreach ($types as $type) : ?>
+            <div class="col-md-6 col-lg-4 mb-4">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="#" class="option-link" onclick="handleClick('<?= $type['OptionValue']; ?>')"><?= $type['Type']; ?></a></h5>
+                       
+                        <?php if (!empty($type['SubType'])) : ?>
+                            <h6>Sub Types:</h6>
+                            <ul>
+                                <?php foreach ($type['SubType'] as $subtype) : ?>
+                                    <li>
+                                    <a href="#" class="option-link" onclick="handleClick('<?= $subtype['OptionValue']; ?>')"><?= $subtype['Type']; ?> </a>
+                                       
+                                    </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        <?php endif; ?>
                     </div>
-                <?php
-                }
-                wp_reset_postdata();
-                ?>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
             </div>
         </div>
     </section>
@@ -56,3 +64,13 @@ get_header();
     <!-- trusted partners end-->
 </main>
 <?php get_footer(); ?>
+<script>
+    function handleClick(optionValue) {
+        // Construct the URL with the passed option value
+        const baseUrl = 'https://ikaar.weavers-web.com/listing/';
+        const fullUrl = `${baseUrl}?ov=${optionValue}`;
+        
+        // Redirect to the constructed URL
+        window.location.href = fullUrl;
+    }
+</script>
