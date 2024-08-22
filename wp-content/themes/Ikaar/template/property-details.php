@@ -727,7 +727,7 @@ if($data) {
                         <?php// echo do_shortcode('[Sassy_Social_Share]'); ?>
                           <a href="https://twitter.com/intent/tweet?url=<?php echo esc_url(get_the_permalink(1417)).'?refid='.$propertyDetails['Reference']; ?>&text=<?php echo $propertyName ;?>" target="_blank" class="btn btn-primary">Twitter</a>
                             <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url(get_the_permalink(1417)).'?refid='.$propertyDetails['Reference']; ?>" target="_blank" class="btn btn-primary">Facebook</a>
-                           <a href="javascript:void(0)" onclick="shareWithGmail('<?php echo $post->ID;?>')" class="btn btn-primary">Gmail</a>
+                           <a href="javascript:void(0)" onclick="shareWithGmail('<?php echo esc_url(get_the_permalink(1417)).'?refid='.$propertyDetails['Reference']; ?>')" class="btn btn-primary">Gmail</a>
 
                         </div>
                     </div>
@@ -759,12 +759,12 @@ if($data) {
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-row">
-                                        <input type="text" placeholder="Subject" name="subject" class="form-control" required>
+                                        <input type="text" placeholder="Subject" name="subject" class="form-control" value="<?php echo $propertyName ;?>">
                                     </div>
                                 </div>
                                 <div class="col-12">
                                     <div class="form-row">
-                                        <textarea class="form-control" name="msg" value="<?php echo get_the_permalink($post->Id);?>" ><?php echo get_the_permalink($post->Id);?></textarea>
+                                        <textarea class="form-control" name="msg" value="<?php echo esc_url(get_the_permalink(1417)).'?refid='.$_GET['refid']; ?>" ><?php echo esc_url(get_the_permalink(1417)).'?refid='.$_GET['refid']; ?></textarea>
                                     </div>
                                 </div>
                                 </div>
