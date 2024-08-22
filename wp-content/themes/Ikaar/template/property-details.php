@@ -178,7 +178,7 @@ if($data) {
                                         <?php 
                                         if($user_id){
                                             $is_wishlist = get_user_meta($user_id,"_iswishlist");
-                                            if (in_array($post->ID, $is_wishlist)){
+                                            if (in_array($propertyDetails['Reference'], $is_wishlist)){
                                                 $is_whisl = "yes";
                                              }else { 
                                                 $is_whisl = "no";
@@ -194,9 +194,9 @@ if($data) {
                                                     <?php if($is_whisl === "yes"){?>
                                                     <li class="list-btn"><a href="<?php echo get_the_permalink($pid);?>" title="view list"><i class="fa fa-heart" aria-hidden="true" style="color:yellow"></i></a></li>
                                                 <?php } elseif($is_whisl === "no"){ ?>
-                                                    <li class="list-btn"><a href="javascript:void(0)" onclick="Addtowishlist('<?php echo $post->ID ;?>','yes')"><i class="fa fa-heart" aria-hidden="true" style="color:white"></i></a></li>
+                                                    <li class="list-btn"><a href="javascript:void(0)" onclick="Addtowishlist('<?php echo $propertyDetails['Reference'] ;?>','yes')"><i class="fa fa-heart" aria-hidden="true" style="color:white"></i></a></li>
                                                <?php } else { ?>
-                                                <li class="list-btn"><a href="javascript:void(0)" onclick="Addtowishlist('<?php echo $post->ID ;?>','yes')"><i class="fa fa-heart" aria-hidden="true" style="color:white"></i></a></li>
+                                                <li class="list-btn"><a href="javascript:void(0)" onclick="Addtowishlist('<?php echo $propertyDetails['Reference'] ;?>','yes')"><i class="fa fa-heart" aria-hidden="true" style="color:white"></i></a></li>
                                                 <?php } ?>
                                                     </ul>
                                           
@@ -830,8 +830,8 @@ if($data) {
                 var mail = jQuery('#mail').val();
                 var number = jQuery('#phone').val();
                 var message = jQuery('#message').val();
-                var current_post_id = "<?php echo $current_post_id; ?>";
-                var current_post_title = "<?php echo $current_post_title; ?>";
+                var current_post_id = "<?php echo $propertyDetails['Reference']; ?>";
+                var current_post_title = "<?php echo $propertyName; ?>";
                 event.preventDefault();
                 var role = "<?php echo $role ?>";
                 if (role === "") {
