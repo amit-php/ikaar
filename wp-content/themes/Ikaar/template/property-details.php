@@ -10,7 +10,7 @@ if (is_user_logged_in()) {
     $role = $current_user->roles[0];
     if($role ==="agent"){
         $pid = 553;
-    }else{
+    } else {
         $pid = 782;
     }
     
@@ -65,10 +65,7 @@ if($data) {
 } else {
     $propertyDetails = NULL;
 }
- //echo "<pre/>";
-//print_r($data) ;
 
-//die;
 ?>
 <!-- body section start -->
 <div id="loader"><img src="<?php echo home_url(); ?>/wp-content/uploads/2024/03/loading-gif-800x600-1.gif" height="100" /></div>
@@ -82,6 +79,7 @@ if($data) {
                             <?php
                             $imgs = $data['result'][0]['Pictures']['Picture'];
                             foreach ($imgs as $value) {
+                                // echo $value['PictureURL'];
                             ?>
                                 <div class="item-box">
                                     <div class="image-box">
@@ -304,7 +302,7 @@ if($data) {
     <!-- trusted partners end-->
 
 <!-- pdf HTML hidden section start-->
-    <section class="pdf-section" id="myContent">
+<section class="pdf-section" id="myContent">
     <div class="item-wrap full-page-wraper" style="display: flex; align-items: center; background: #333333; width: 2245px; height: 1588px; position: relative; color: #fff; padding-right: 130px; margin: 0 auto;">
                <div class="container-fluid">
                   <div class="front-page-content" style="display: flex; align-items: center; justify-content: center; position: absolute; top: 0; right: 0; bottom: 0; left: 0; margin: auto;">
@@ -328,63 +326,47 @@ if($data) {
                               <ul style="padding: 0;">
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Reference:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"ref_no",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Reference']; ?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Property Area:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"property_area_sq",true); ?>(Sq.ft)</span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Area']; ?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Location:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php
-                                            $taxonomy = 'property_location';
-                                            $terms = get_the_terms(get_the_ID(), $taxonomy);
-                                            if ($terms && !is_wp_error($terms)) {
-                                                foreach ($terms as $term) {
-                                                    $name = $term->name;
-                                                    $term_link = get_term_link($term);
-                                                }
-                                            }
-                                            echo $name;
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">
+                                        <?php
+                                            echo $propertyDetails['Location'];
                                             ?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Type:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">  <?php
-                                            $taxonomy = 'property_type';
-                                            $terms = get_the_terms(get_the_ID(), $taxonomy);
-                                            if ($terms && !is_wp_error($terms)) {
-                                                foreach ($terms as $term) {
-                                                    $name = $term->name;
-                                                    $term_link = get_term_link($term);
-                                                }
-                                            }
-                                            echo $name;
-                                            ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"> 
+                                         <?php echo $propertyDetails['PropertyType']['Type'] ;?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Beds:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"bwdrooms_qtt",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Bedrooms']; ?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Bath:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"bathrooms_qtt",true); ?></span>
-                                 </li>listing-details-section common-padding
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Bathrooms']; ?></span>
+                                 </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">BHK:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"bhk",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Bhk']; ?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Terrace Size:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"terrace_size:",true); ?>(Sq.ft)</span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Terrace']; ?>(m²)</span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Built Size:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"built_size",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Built']; ?>(m²)</span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Price:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€<?php echo get_post_meta($post->ID,"property_price",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€<?php echo $propertyDetails['OriginalPrice']; ?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Community Fees:</span>
@@ -399,7 +381,7 @@ if($data) {
                         </div>
                      </div>
                      <div class="col-wrap" style="width: 60%;">
-                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo get_the_post_thumbnail_url($post->ID, 'full');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo $imgs[0]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
                      </div>
                     
                   </div>
@@ -410,12 +392,12 @@ if($data) {
                <div class="container-fluid" style="width: 100%; height: 100%;">
                   <div class="item-row" style="display: flex; height: 100%;">
                      <div class="col-wrap" style="display: flex; align-items: center; width: 50%; height: 100%;">
-                        <div class="image-wraper" style="width: 100%; height: 100%;"><img src="<?php echo get_the_post_thumbnail_url($post->ID, 'full');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div class="image-wraper" style="width: 100%; height: 100%;"><img src="<?php echo $imgs[1]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
                      </div>
                      <div class="col-wrap" style="display: flex; align-items: center; width: 50%; height: 100%;">
                         <div class="info-wraper" style="padding-left: 20px;">
                            <h3 style=" margin: 0 0 20px; padding: 0; color: #D4A884; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 32px;">Description:</h3>
-                           <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><?php echo get_post_field('post_content', $post_id);?></p>
+                           <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><?php echo $propertyDetails['Description'];?></p>
                         </div>
                      </div>
                   </div>
@@ -429,31 +411,40 @@ if($data) {
                         <div class="info-wraper" style="width: 100%;">
                            <div class="menu-wrap">
                               <ul style="padding: 0;">
-                              <?php 
-                              $pdfTerms = get_post_all_parentes_terms_and_childs_pdf(get_the_ID(),"amenities");
-                              if($pdfTerms){
-                                 foreach ($pdfTerms as $key => $pdfTermsvalue) {
-                              ?>
-                                 <li style="display: flex; margin-bottom: 15px;">
-                                    <?php echo $pdfTermsvalue; ?>
-                                 </li>
-                                 <?php }} ?>
-                                 
+                              
+                                 <?php
+                                      
+                                       if(!empty($Allterms)){
+                                        foreach ($Allterms as $key => $value) {
+                                    ?>
+                                        <li style="display: flex; margin-bottom: 15px;">
+                                                <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;"><?php echo  $value['Type'] ;?>:</span>
+                                                <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo  implode(",", $value['Value']) ;?></span>
+                                            </li>
+                                            <?php } } ?>
                               </ul>
                            </div>
                         </div>
                      </div>
                      <div class="col-wrap" style="width: 60%;">
-                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo get_the_post_thumbnail_url($post->ID, 'full');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
-                     </div>
+                        
+                        <?php if($imgs[2]['PictureURL']){
+                        ?>
+                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo $imgs[2]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                     <?php } else { ?>
+                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo $imgs[0]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+
+                     <?php }
+                     ?>
+                        </div>
                     
                   </div>
                </div>
                <div class="side-bar-design" style="position: absolute; top: 0; left: 30px; width: 75px; height: 100%;"><img src="<?php echo get_theme_value('border_default_images_unbranded');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
             </div>
             <?php 
-             $galleryImage = get_field('add_images');
-             foreach ($imgs as $kk=>$value) {
+            //$galleryImage = get_field('add_images');
+             foreach ($imgs as $kk=>$img) {
                 $kk++;
                 if($kk%2){
                     $position = "right";
@@ -463,7 +454,7 @@ if($data) {
                 ?>
             <div class="item-wrap" style="background: #333333; width: 2245px; height: 1588px; position: relative; color: #fff; padding-left: 130px; margin: 0 auto;">
                <div class="ful-image-wraper"  style="width: 100%; height: 100%; position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
-               <img src="<?php echo $value['image']; ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+               <img src="<?php echo $img['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
            
             <div class="side-bar-design" style="position: absolute; top: 0; <?=$position;?>: 30px; width: 75px; height: 100%;"><img src="<?php echo get_theme_value('border_default_images');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
@@ -521,79 +512,61 @@ if($data) {
                               <ul style="padding: 0;">
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Reference:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"ref_no",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Reference'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Property Area:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"property_area_sq",true); ?>(Sq.ft)</span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Area'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Location:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php
-                                            $taxonomy = 'property_location';
-                                            $terms = get_the_terms(get_the_ID(), $taxonomy);
-                                            if ($terms && !is_wp_error($terms)) {
-                                                foreach ($terms as $term) {
-                                                    $name = $term->name;
-                                                    $term_link = get_term_link($term);
-                                                }
-                                            }
-                                            echo $name;
-                                            ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">
+                                          <?php echo $propertyDetails['Location'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Type:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">  <?php
-                                            $taxonomy = 'property_type';
-                                            $terms = get_the_terms(get_the_ID(), $taxonomy);
-                                            if ($terms && !is_wp_error($terms)) {
-                                                foreach ($terms as $term) {
-                                                    $name = $term->name;
-                                                    $term_link = get_term_link($term);
-                                                }
-                                            }
-                                            echo $name;
-                                            ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">  
+                                           <?php echo $propertyDetails['PropertyType']['Type'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Beds:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"bwdrooms_qtt",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Bedrooms'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Bath:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"bathrooms_qtt",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Bathrooms'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">BHK:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"bhk",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Bhk'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Terrace Size:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"terrace_size:",true); ?>(Sq.ft)</span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Terrace'];?>(m²)</span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Built Size:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo get_post_meta($post->ID,"built_size",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo $propertyDetails['Built'];?>(m²)</span>
                                  </li>
 
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Price:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€<?php echo get_post_meta($post->ID,"property_price",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€<?php echo $propertyDetails['OriginalPrice'];?></span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">Community Fees:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€<?php echo get_post_meta($post->ID,"community_fees",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€ 0.0</span>
                                  </li>
                                  <li style="display: flex; margin-bottom: 15px;">
                                     <span  style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;">IBI Fees:</span>
-                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€<?php echo get_post_meta($post->ID,"ibi_fees",true); ?></span>
+                                    <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;">€ 0.0</span>
                                  </li>
                               </ul>
                            </div>
                         </div>
                      </div>
                      <div class="col-wrap" style="width: 60%;">
-                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo get_the_post_thumbnail_url($post->ID, 'full');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo $imgs[0]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
                      </div>
                     
                   </div>
@@ -604,12 +577,12 @@ if($data) {
                <div class="container-fluid" style="width: 100%; height: 100%;">
                   <div class="item-row" style="display: flex; height: 100%;">
                      <div class="col-wrap" style="display: flex; align-items: center; width: 50%; height: 100%;">
-                        <div class="image-wraper" style="width: 100%; height: 100%;"><img src="<?php echo get_the_post_thumbnail_url($post->ID, 'full');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                        <div class="image-wraper" style="width: 100%; height: 100%;"><img src="<?php echo $imgs[1]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
                      </div>
                      <div class="col-wrap" style="display: flex; align-items: center; width: 50%; height: 100%;">
                         <div class="info-wraper" style="padding-left: 20px;">
                            <h3 style=" margin: 0 0 20px; padding: 0; color: #D4A884; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 32px;">Description:</h3>
-                           <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><?php echo get_post_field('post_content', $post_id);?></p>
+                           <p style="font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 25px;"><?php echo $propertyDetails['Description'];?></p>
                         </div>
                      </div>
                   </div>
@@ -624,30 +597,38 @@ if($data) {
                         <div class="info-wraper" style="width: 100%;">
                            <div class="menu-wrap">
                               <ul style="padding: 0;">
-                              <?php 
-                              $pdfTerms = get_post_all_parentes_terms_and_childs_pdf(get_the_ID(),"amenities");
-                              if($pdfTerms){
-                                 foreach ($pdfTerms as $key => $pdfTermsvalue) {
-                              ?>
-                                 <li style="display: flex; margin-bottom: 15px;">
-                                    <?php echo $pdfTermsvalue; ?>
-                                 </li>
-                                 <?php }} ?>
+                              <?php
+                                      
+                                      if(!empty($Allterms)){
+                                       foreach ($Allterms as $key => $value) {
+                                   ?>
+                                       <li style="display: flex; margin-bottom: 15px;">
+                                               <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; color: #D4A884; font-size: 28px; font-weight: 600;"><?php echo  $value['Type'] ;?>:</span>
+                                               <span style="display: block; width: 50%; font-family: Verdana, Geneva, Tahoma, sans-serif; font-size: 28px;"><?php echo  implode(",", $value['Value']) ;?></span>
+                                           </li>
+                                           <?php } } ?>
                                  
                               </ul>
                            </div>
                         </div>
                      </div>
                      <div class="col-wrap" style="width: 60%;">
-                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo get_the_post_thumbnail_url($post->ID, 'full');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
-                     </div>
+                        <?php
+                        if($imgs[2]['PictureURL']) { ?>
+                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo $imgs[2]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+                    <?php } else { ?>
+                        <div class="image-wraper"  style="width: 100%; height: 100%;"><img src="<?php echo $imgs[1]['PictureURL'];?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
+
+
+                 <?php   } ?>
+                        </div>
                     
                   </div>
                </div>
                <div class="side-bar-design" style="position: absolute; top: 0; left: 30px; width: 75px; height: 100%;"><img src="<?php echo get_theme_value('border_default_images_unbranded');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
             </div>
             <?php 
-             $galleryImage = get_field('add_images');
+            //$galleryImage = get_field('add_images');
              foreach ($imgs as $kk=>$value) {
                 $kk++;
                 if($kk%2){
@@ -658,7 +639,7 @@ if($data) {
                 ?>
             <div class="item-wrap" style="background: #333333; width: 2245px; height: 1588px; position: relative; color: #fff; padding-left: 130px; margin: 0 auto;">
                <div class="ful-image-wraper"  style="width: 100%; height: 100%; position: absolute; top: 0; right: 0; bottom: 0; left: 0;">
-               <img src="<?php echo $value['image']; ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
+               <img src="<?php echo $value['PictureURL']; ?>" alt="" style="width: 100%; height: 100%; object-fit: cover;">
             </div>
            
             <div class="side-bar-design" style="position: absolute; top: 0; <?=$position;?>: 30px; width: 75px; height: 100%;"><img src="<?php echo get_theme_value('border_default_images_unbranded');?>" alt="" style="width: 100%; height: 100%; object-fit: cover;"></div>
@@ -744,8 +725,8 @@ if($data) {
                         <div class="form-wraper text-center">
                         <?php //echo do_shortcode('[shared_counts]'); ?>
                         <?php// echo do_shortcode('[Sassy_Social_Share]'); ?>
-                          <a href="https://twitter.com/intent/tweet?url=<?php echo get_the_permalink($post->ID);?>&text=<?php echo get_the_title( $post->ID ); ?>" target="_blank" class="btn btn-primary">Twitter</a>
-                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo get_the_permalink($post->ID);?>" target="_blank" class="btn btn-primary">Facebook</a>
+                          <a href="https://twitter.com/intent/tweet?url=<?php echo esc_url(get_the_permalink(1417)).'?refid='.$propertyDetails['Reference']; ?>&text=<?php echo $propertyName ;?>" target="_blank" class="btn btn-primary">Twitter</a>
+                            <a href="https://www.facebook.com/sharer/sharer.php?u=<?php echo esc_url(get_the_permalink(1417)).'?refid='.$propertyDetails['Reference']; ?>" target="_blank" class="btn btn-primary">Facebook</a>
                            <a href="javascript:void(0)" onclick="shareWithGmail('<?php echo $post->ID;?>')" class="btn btn-primary">Gmail</a>
 
                         </div>

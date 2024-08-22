@@ -884,7 +884,7 @@ if ($user_id) {
          <script>
             var basdocName = '<?php echo $postTitles ; ?>';
         const fullname = basdocName+'.pdf';
-             jQuery('#myContent').hide();
+             jQuery('#myContent').show();
     function Convert_HTML_To_PDF() {
       //  var _isPremum = "<?php echo $level_name ; ?>"
    // if(_isPremum) {
