@@ -6,10 +6,8 @@ $propertyTypes = dynamic_property_type_search();
 //print_r($propertyTypes);
 
 $types = $propertyTypes['PropertyTypes']['PropertyType'];
+print_r($types);
 ?>
-
-
-
 <main>
     <section class="hero-banner inner-banner position-relative">
         <?php $banner_image_service = get_field("banner_image_service");
@@ -36,14 +34,14 @@ $types = $propertyTypes['PropertyTypes']['PropertyType'];
             <div class="col-md-6 col-lg-4 mb-4">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><a href="#" class="option-link" onclick="handleClick('<?= $type['OptionValue']; ?>')"><?= $type['Type']; ?></a></h5>
+                        <h5 class="card-title"><a href="javascript:void 0;" class="option-link" onclick="handleClick('<?= $type['OptionValue']; ?>')"><?= $type['Type']; ?></a></h5>
                        
                         <?php if (!empty($type['SubType'])) : ?>
                             <h6>Sub Types:</h6>
                             <ul>
                                 <?php foreach ($type['SubType'] as $subtype) : ?>
                                     <li>
-                                    <a href="#" class="option-link" onclick="handleClick('<?= $subtype['OptionValue']; ?>')"><?= $subtype['Type']; ?> </a>
+                                    <a href="javascript:void 0;" class="option-link" onclick="handleClick('<?= $subtype['OptionValue']; ?>')"><?= $subtype['Type']; ?> </a>
                                        
                                     </li>
                                 <?php endforeach; ?>
@@ -66,10 +64,12 @@ $types = $propertyTypes['PropertyTypes']['PropertyType'];
 <?php get_footer(); ?>
 <script>
     function handleClick(optionValue) {
-        // Construct the URL with the passed option value
-        const baseUrl = 'https://ikaar.weavers-web.com/listing/';
-        const fullUrl = `${baseUrl}?ov=${optionValue}`;
-        
+        const parameters = {
+                            P_PropertyTypes: optionValue
+                            };
+        const encodedParams = encodeURIComponent(JSON.stringify(parameters));
+        const fullUrl = `https://ikaar.weavers-web.com/listing/?pd=${encodedParams}`;
+        console.log(fullUrl)
         // Redirect to the constructed URL
         window.location.href = fullUrl;
     }

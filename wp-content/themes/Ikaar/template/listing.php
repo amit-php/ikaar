@@ -263,23 +263,31 @@ get_header();
             </div>
             <div class="row propClass">
                 <?php
-                $optionValue = $_GET['ov'];
-                if($optionValue){
-                    $dynamic_params = [
-                        'p_agency_filterid' => 1,
-                        'P_PageSize'=>9,
-                        'P_sandbox' => true,
-                        'P_PropertyTypes' => $optionValue
-                    ];
-                } else {
-                    $dynamic_params = [
-                        'p_agency_filterid' => 1,
-                        'P_PageSize'=>9,
-                        'P_sandbox' => true
-                    ];
+                $dynamic_params = [];
+              $dynamic_params = [
+                'p_agency_filterid' => 1,
+                'P_PageSize'=>9,
+                'P_sandbox' => true
+              ];
+
+               if (isset($_GET['pd'])) {
+                $decodedJson = urldecode($_GET['pd']);
+                // Remove any backslashes added by escaping
+                $decodedJson = stripslashes($decodedJson);
+                $decodedParams = json_decode($decodedJson, true);
+                if (is_array($decodedParams)) {
+                   
+                    foreach ($decodedParams as $key => $value) {
+                    $result[$key] = $value;
+                    }
+                    $dynamic_params = array_merge($result, $dynamic_params);
+                    
                 }
+            }
+            //print_r($dynamic_params);
+                // Access the individual values
                     $data = fetch_data_from_resales_api($dynamic_params);
-                   // echo "<pre/>";
+                   //echo "<pre/>";
                     //print_r($data);
                     //die;
                     if ($data["status"] === "success") {
@@ -355,15 +363,17 @@ get_header();
             }
                 ?>
             </div>
-            <div class="button-wrap text-center" id="loadhide">
-                        <a href="javascript:void(0)" class="btn" id="LoadMoreProp">
-                        <?php echo get_theme_value("load_more_button"); ?>
-                        </a>
-                 <button class="btn  text-center" type="button"  id="loding-btn">
-                   <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
-                   Loading...
-                </button>
-            </div>
+            <?php if($data['queryinfo']['PropertyCount'] > 9) { ?>
+                <div class="button-wrap text-center" id="loadhide">
+                            <a href="javascript:void(0)" class="btn" id="LoadMoreProp">
+                            <?php echo get_theme_value("load_more_button"); ?>
+                            </a>
+                    <button class="btn  text-center" type="button"  id="loding-btn">
+                    <span class="spinner-grow spinner-grow-sm" role="status" aria-hidden="true"></span>
+                    Loading...
+                    </button>
+                </div>
+                <?php } ?>
 
         </div>
     </section>

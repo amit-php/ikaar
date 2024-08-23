@@ -1,6 +1,11 @@
-<?php get_header(); ?>
+<?php get_header(); 
 
-<!-- body section start -->
+
+// $locationList = dynamic_property_location_search();
+//                          echo "<pre>";
+//                          print_r($locationList);
+//                            die;
+                           ?>
 <main>
     <!-- banner section start -->
     <?php
@@ -33,17 +38,17 @@
                     <div class="button-wrap">
                         <ul class="nav justify-content-center">
                             <?php if (!empty($for_sale_button['title'])) { ?>
-                                <li><a href="<?php echo $for_sale_button['url']; ?>" class="btn-border">
+                                <li><a href="javascript:void 0" class="btn-border" onclick="handleClick('p_new_devs','include')">
                                         <?php echo $for_sale_button['title']; ?>
                                     </a></li>
                             <?php }
                             if (!empty($new_build_button['title'])) { ?>
-                                <li><a href="<?php echo $new_build_button['url']; ?>" class="btn-border">
+                                <li><a href="javascript:void 0" class="btn-border" onclick="handleClick('p_new_devs', 'only')">
                                         <?php echo $new_build_button['title']; ?>
                                     </a></li>
                             <?php }
                             if (!empty($rental_button['title'])) { ?>
-                                <li><a href="<?php echo $rental_button['url']; ?>" class="btn-border">
+                                <li><a href="javascript:void 0" class="btn-border" onclick="handleClick('P_IncludeRented', 1)">
                                         <?php echo $rental_button['title']; ?>
                                     </a></li>
                             <?php } ?>
@@ -59,88 +64,32 @@
     <section class="Category-section">
         <div class="container container-custome">
             <form method="get" id="searchform" action="<?php echo site_url(); ?>">
-                <!-- <div class="row">
-                    <div class="col-lg-3 col-md-6 medium-col">
-                        <div class="form-row">
-                            <input type="text" name="s" id="s" class="form-control" placeholder="Property Category">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 medium-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Min Price">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 medium-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Maximum price">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Location">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Property Type">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Beds & Baths">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Min.Built">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Min.Built">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Min.Plot">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Ref#">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="text" class="form-control" placeholder="Features">
-                        </div>
-                    </div>
-                    <div class="col-lg-3 col-md-6 big-col">
-                        <div class="form-row">
-                            <input type="submit" class="btn" placeholder="Search">
-                        </div>
-                    </div>
-                </div> -->
+            
                 <div class="row">
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="form-row">
                             <label for="">Property Category</label>
-                            <select name="s" id="s" class="form-control">
-                                <option value="0">Choose Category</option>
-                                <?php $property_category = get_terms(
-                                    array(
-                                        'taxonomy' => 'property_type',
-                                        'hide_empty' => false,
-                                    )
-                                );
-                                foreach ($property_category as $category) {
-                                    ?>
-                                    <option value="<?php echo $category->slug; ?>">
-                                        <?php echo $category->name; ?>
-                                    </option>
-                                <?php } ?>
-                            </select>
-                            <!-- <input type="text" class="form-control" placeholder="Property Category"> -->
+                            <?php 
+                            $propertyTypes = dynamic_property_type_search();
+                            $data = $propertyTypes['PropertyTypes']['PropertyType'];
+                            echo '<select name="P_PropertyTypes" class="form-control">';
+                            echo '<option value="">Select Property Type</option>';
+                        // Function to generate options
+                        function generateOptions($data) {
+                            foreach ($data as $item) {
+                                echo '<optgroup label="' . htmlspecialchars($item['Type']) . '">';
+                                foreach ($item['SubType'] as $subtype) {
+                                    echo '<option value="' . htmlspecialchars($subtype['OptionValue']) . '">' . htmlspecialchars($subtype['Type']) . '</option>';
+                                }
+                                echo '</optgroup>';
+                            }
+                        }
+
+                        // Generate the options
+                        generateOptions($data);
+
+                        echo '</select>';
+                        ?>
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
@@ -159,19 +108,8 @@
                                    // print_r($priceArr);
                                     ?>
                             <label for="">Minimum price</label>
-                            <select name="location" id="proloc" class="form-control min">
-                                <option value="0">Select Minimum Price</option>
-                               <?php
-                               foreach ($priceArr as $key => $value) {
-                            
-                               ?>
-                                    <option value="<?php echo $value; ?>">
-                                        <?php echo $value; ?>
-                                        
-                                    </option>
-                                <?php } ?>
-                               
-                            </select>
+                            <input type="number" name="P_Min" min="1" class="form-control" />
+                           
                             
                             <!-- <input type="number" name="min" id="min" min="1" title="Please enter number"
                                 class="form-control" placeholder="Minimum Price"> -->
@@ -180,38 +118,27 @@
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="form-row">
                             <label for="">Maximum Price</label>
-                            <select name="location" id="proloc" class="form-control max">
-                                <option value="0">Select Maximum Price</option>
-                                <?php 
-                               foreach ($priceArr as $key => $value) {
-                            if($key > 0){
-                               ?>
-                                    ?>
-                                    <option value="<?php echo $value; ?>">
-                                        <?php echo $value; ?>
-                                    </option>
-                                <?php } }?>
-                            </select>
+                            <input type="number" name="P_Max" min="1" class="form-control" />
                             <!-- <input type="number" name="max" id="max" min="1" title="Please enter number"
                                 class="form-control" placeholder="Maximum Price"> -->
                         </div>
                     </div>
                     <div class="col-xl-3 col-lg-4 col-md-6">
                         <div class="form-row">
+                            <?php 
+                            $locationList = dynamic_property_location_search();
+                           // echo "<pre>";
+                           // print_r($locationList);
+                            ?>
                             <label for="">Location</label>
                             <!-- <input type="text" class="form-control" placeholder="Location"> -->
-                            <select name="location" id="proloc" class="form-control">
+                            <select name="P_Location" id="proloc" class="form-control">
                                 <option value="0">Choose Location</option>
-                                <?php $property_location = get_terms(
-                                    array(
-                                        'taxonomy' => 'property_location',
-                                        'hide_empty' => false,
-                                    )
-                                );
-                                foreach ($property_location as $location) {
+                               <?php
+                                foreach ($locationList as $location) {
                                     ?>
-                                    <option value="<?php echo $location->slug; ?>">
-                                        <?php echo $location->name; ?>
+                                    <option value="<?php echo $location; ?>">
+                                        <?php echo $location; ?>
                                     </option>
                                 <?php } ?>
                             </select>
@@ -844,4 +771,17 @@
                 });
         });
 
+</script>
+<script>
+    function handleClick(optionkey , value) {
+        
+        const parameters = {
+                          [optionkey] : value
+                            };
+        const encodedParams = encodeURIComponent(JSON.stringify(parameters));
+        const fullUrl = `https://ikaar.weavers-web.com/listing/?pd=${encodedParams}`;
+        console.log(fullUrl)
+        // Redirect to the constructed URL
+        window.location.href = fullUrl;
+    }
 </script>
